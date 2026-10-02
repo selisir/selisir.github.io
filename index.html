@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--
+  ============ GUIDA RAPIDA ============
+  1. CONTENUTI (testi, link, progetti, skill, CV): modifica SOLO l'oggetto DATA in fondo al file.
+  2. COLORI E FONT dei tre temi: variabili CSS all'inizio di <style>.
+  3. STRUTTURA: sezioni <section> nel body (Home, About, Work, Projects, Skills, Contact).
+  4. EFFETTI: glitter/scia (canvas), animazione cambio tema e "burst" al click sono nello script.
+  Cerca le scritte "MODIFICA" per trovare i punti pensati per essere cambiati.
+  ======================================
+-->
+<html lang="it" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elisa Samaritani · Portfolio</title>
+<style>
+/* MODIFICA - VARIABILI DEI TEMI
+   --bg sfondo | --fg testo | --mut testo secondario | --card sfondo riquadri
+   --acc colore principale (link, bottoni, maglia del personaggio) | --bd bordi
+   --font testo | --head titoli | --r arrotondamento angoli | --sh ombra */
+/* DARK: terminale / neon */
+:root{--bg:#0a0d0b;--fg:#d7e8dc;--mut:#7f978a;--card:#111812;--acc:#12D640;--bd:#1f3a27;--font:ui-monospace,Menlo,Consolas,monospace;--head:var(--font);--r:4px;--sh:0 0 18px #12d64022}
+/* LIGHT: carta calda / editoriale */
+[data-theme=light]{--bg:#fbf5ea;--fg:#2b2119;--mut:#7a6a5a;--card:#fffdf8;--acc:#e2673a;--bd:#eadfcb;--font:system-ui,sans-serif;--head:Georgia,'Times New Roman',serif;--r:18px;--sh:0 6px 20px #8a6a3a1a}
+/* GLITTER: rosa tondo */
+[data-theme=glitter]{--bg:#ffc9e4;--fg:#5a1f43;--mut:#a24f80;--card:#ffe6f2;--acc:#e0248f;--bd:#f59ac8;--font:'Trebuchet MS',system-ui,sans-serif;--head:var(--font);--r:26px;--sh:0 6px 24px #e0248f44}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 var(--font);transition:background .4s,color .4s}
+h1,h2,h3{font-family:var(--head);margin:0 0 .5em}
+a{color:var(--acc);text-decoration:none;position:relative}
+[data-theme=dark] body{background-image:linear-gradient(#12d64010 1px,transparent 1px),linear-gradient(90deg,#12d64010 1px,transparent 1px);background-size:36px 36px}
+[data-theme=dark] h2::before{content:"> ";color:var(--acc)}
+[data-theme=light] h2{font-style:italic}
+[data-theme=glitter] a:hover::after{content:"✦ ✧ ✦";position:absolute;top:-1.1em;left:0;font-size:.75em;white-space:nowrap;animation:tw .5s infinite alternate}
+@keyframes tw{to{opacity:.3;transform:translateY(-3px) rotate(8deg)}}
+#sparkle{position:fixed;inset:0;pointer-events:none;z-index:2;display:none}
+[data-theme=glitter] #sparkle{display:block}
+nav{position:fixed;top:0;left:0;right:0;z-index:9;display:flex;gap:6px 18px;align-items:center;padding:10px 20px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd);flex-wrap:wrap}
+nav .sp{flex:1}
+nav a{color:var(--fg)}nav a:hover{color:var(--acc)}
+.tb{background:var(--card);border:1px solid var(--bd);border-radius:999px;cursor:pointer;padding:3px 10px;font-size:1rem}
+section{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:90px 20px 30px}
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px}
+.typing{color:var(--acc);border-right:3px solid var(--acc);padding-right:4px;animation:bl .8s infinite}
+@keyframes bl{50%{border-color:transparent}}
+/* MODIFICA - colore capelli: uguale in tutti i temi (cambia solo la maglia, che usa --acc) */
+:root{--hair:#3a2422}
+.girl{width:190px;height:auto;filter:drop-shadow(0 6px 14px #0004)}
+.hair{fill:var(--hair);transition:fill .4s}
+.eyes{transform-origin:100px 102px;animation:blink 5s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:var(--r);padding:12px 26px;font:inherit;cursor:pointer}
+[data-theme=dark] .btn{color:#001a06}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh);padding:18px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.pc{display:block;color:var(--fg);padding:0;overflow:hidden;transition:transform .2s}
+.pc:hover{transform:translateY(-4px);border-color:var(--acc)}
+.pc .im{height:150px;background:linear-gradient(135deg,var(--acc),var(--bd));display:flex;align-items:center;justify-content:center;font-size:2rem}
+.pc img{width:100%;height:150px;object-fit:cover;display:block}
+.pc h3{padding:12px 16px;margin:0;font-size:1.05rem}
+.chip{display:inline-block;border:1px solid var(--bd);background:var(--card);border-radius:999px;padding:2px 14px;margin:4px 6px 4px 0}
+.mut{color:var(--mut)}
+.ic{display:flex;gap:14px;flex-wrap:wrap}
+.ic a{display:flex;align-items:center;gap:8px;color:var(--fg);padding:10px 16px}
+.ic svg{width:24px;height:24px;fill:currentColor}
+.ic a:hover{color:var(--acc)}
+.hide{display:none!important}
+footer{text-align:center;padding:40px;color:var(--mut)}
+</style>
+</head>
+<body>
+<canvas id="sparkle"></canvas>
+<!-- BARRA IN ALTO: ogni link punta all'id di una sezione (#about, #work...). Aggiungi/togli voci qui e la sezione corrispondente sotto. -->
+<nav>
+  <a href="#home">Home</a><a href="#about">About me</a><a href="#work">Work</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  <span class="sp"></span>
+  <button class="tb" onclick="setTheme('dark',event)" title="Scuro">🌙</button>
+  <button class="tb" onclick="setTheme('light',event)" title="Chiaro">☀️</button>
+  <button class="tb" onclick="setTheme('glitter',event)" title="Glitter">✨</button>
+</nav>
+
+<div id="page">
+  <!-- HOME: personaggio + scritta con parole che cambiano (le parole sono in DATA.roles) -->
+  <section id="home">
+    <!-- MODIFICA - TUA ILLUSTRAZIONE: cancella tutto il blocco <svg class="girl"> ... </svg> qui sotto e decommenta la riga seguente
+         (metti il file in img/me.png). Le pupille che seguono il cursore funzionano solo con il disegno SVG, non con l'immagine. -->
+    <!-- <img class="girl" src="img/me.png" alt="Elisa"> -->
+    <svg class="girl" viewBox="0 0 200 215" aria-hidden="true">
+      <path class="hair" d="M100 8C48 8 26 55 29 108c2 40-8 78 12 100h118c20-22 10-60 12-100C174 55 152 8 100 8z"/>
+      <rect x="88" y="138" width="24" height="34" fill="#f2c4a0"/>
+      <path d="M40 215c8-32 34-46 60-46s52 14 60 46z" fill="var(--acc)"/>
+      <ellipse cx="100" cy="96" rx="47" ry="54" fill="#f6cfae"/>
+      <path class="hair" d="M50 92C52 44 82 28 104 30c26 2 46 24 46 62-14-18-32-30-48-38-10 14-30 30-52 38z"/>
+      <circle cx="52" cy="112" r="4" fill="var(--acc)"/><circle cx="148" cy="112" r="4" fill="var(--acc)"/>
+      <path d="M66 86q12-8 24-2M110 84q12-6 24 2" stroke="#5b3a2c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <g class="eyes">
+        <ellipse cx="80" cy="102" rx="11" ry="12" fill="#fff"/><circle class="pupil" cx="80" cy="103" r="6.5" fill="#2a1a12"/>
+        <ellipse cx="120" cy="102" rx="11" ry="12" fill="#fff"/><circle class="pupil" cx="120" cy="103" r="6.5" fill="#2a1a12"/>
+        <path d="M68 96l-7-4M70 91l-5-6M132 96l7-4M130 91l5-6" stroke="#2a1a12" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+      <circle cx="68" cy="124" r="8" fill="#ff8fa8" opacity=".45"/><circle cx="132" cy="124" r="8" fill="#ff8fa8" opacity=".45"/>
+      <path d="M98 114q2 6 4 0" stroke="#c98f6b" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M86 132q14 12 28 0" stroke="#c2486a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <h1>Hi, I'm <span id="who"></span> <span class="typing" id="typed"></span></h1>
+    <button class="btn" onclick="location.hash='#about'">Get started</button>
+  </section>
+  <!-- ABOUT ME: il testo viene da DATA.bio. Per aggiungere una foto o altri paragrafi scrivili dentro questa section. -->
+  <section id="about"><h2>About me</h2><p id="bio"></p></section>
+  <!-- WORK: esperienze, generate da DATA.experiences -->
+  <section id="work"><h2>Work</h2><div id="exp"></div></section>
+  <!-- PROJECTS: riquadri con immagine e titolo, generati da DATA.projects. Il click apre la pagina di dettaglio (id="detail"). -->
+  <section id="projects"><h2>Projects</h2><div class="grid" id="plist"></div></section>
+  <!-- SKILLS: gruppi di chip, da DATA.skills -->
+  <section id="skills"><h2>Skills</h2><div id="sk"></div></section>
+  <!-- CONTACT: icone mail/GitHub/LinkedIn e CV, da DATA -->
+  <section id="contact"><h2>Contact</h2><div class="ic" id="ct"></div><h3 style="margin-top:28px">CV</h3><div class="ic" id="cv"></div></section>
+</div>
+<section id="detail" class="hide"></section>
+<footer id="foot"></footer>
+
+<script>
+/* ===== MODIFICA - DATI: qui cambi tutti i contenuti del sito ===== */
+const DATA = {
+  name: "Elisa",
+  // Parole che si alternano dopo "Hi, I'm ..." (aggiungine o toglile)
+  roles: ["Coder", "AI Engineer", "Problem Solver", "Optimizer", "Data Scientist", "Cybersecurity Enthusiast"],
+  // Testo della sezione About me
+  bio: "I'm a Master's student in Artificial Intelligence, Data Science & Big Data at the University of Ferrara, with a Bachelor's degree in Computer Science from the same university. I work on LLM-based AI agents, geospatial data pipelines, computer vision and deep learning, and I've built applications for smart glasses through the Reply Ambassador programme. I enjoy bridging research and real-world implementation, and explaining complex technical ideas clearly, a skill I developed as an IT instructor.",
+  // Contatti: mail, GitHub, LinkedIn (le icone si aggiornano da sole)
+  // MODIFICA: la mail universitaria smette di funzionare dopo la laurea, meglio una personale
+  mail: "elisa.samaritani@edu.unife.it",
+  github: "https://github.com/selisir",
+  linkedin: "https://linkedin.com/in/elisa-samaritani-921274270",
+  // CV: metti i PDF nella cartella cv/ e aggiorna i nomi
+  cv: [{label: "CV (Italiano)", url: "cv/cv-it.pdf"}, {label: "CV (English)", url: "cv/cv-en.pdf"}],
+  // Esperienze: copia la riga {role, org, period, text} per aggiungerne altre
+  experiences: [
+    {role: "Intern, AI Agent Orchestration (thesis)", org: "MEEO S.r.l.", period: "Oct 2025 – Mar 2026",
+     text: "Curricular internship for my thesis in Earth Observation. I designed and developed AI agent orchestration systems based on Large Language Models, integrating geospatial data processing pipelines and automated workflows for data analysis and interpretation."},
+    {role: "Ambassador", org: "Reply", period: "Jul 2024 – present",
+     text: "Built an application for smart glasses using Hub Simulator, Python scripting, automated workflows and webhook-based integrations. Led the project “Accelerating Robotic Perception: Scene Graphs and GenAI for Agile Robotics”, exploring how scene graphs and GenAI improve real-time decision-making in robotics. Wrote an article on the winners of the 2024 Student Clash (Sidewalk AI, a project for urban accessibility) and designed interactive Figma mockups."},
+    {role: "IT Instructor", org: "AECA", period: "Oct 2023 – Apr 2024",
+     text: "Taught computer science fundamentals, data management and Microsoft Office in the vocational course “Operatore Informatico”, designing inclusive teaching strategies for teenage learners."},
+    {role: "Research Intern", org: "University of Ferrara", period: "Jun – Sep 2023",
+     text: "Worked with the Julia programming language and carried out research on intelligent data analysis applied to memory consistency and persistence, in a neurophysiological case study."}
+  ],
+  // Skills: "Gruppo": ["voce", "voce"]
+  skills: {
+    "Programming": ["Python", "Julia", "TypeScript", "Mosel/Xpress"],
+    "AI / ML": ["Deep Learning", "Computer Vision", "NLP", "LLMs & AI agents", "Time series"],
+    "Data & tools": ["Geospatial pipelines", "n8n", "Git", "Figma"],
+    "Other": ["Cybersecurity (CyberChallenge, CTF)", "Optimization", "UI/UX design", "Teaching"],
+    "Certifications": ["Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate"],
+    "Spoken languages": ["Italian", "English", "French"]
+  },
+  // MODIFICA - PROGETTI: sostituisci ogni "repo" col link reale (es. https://github.com/selisir/nome-repo)
+  // e metti l'immagine in img/ con il nome scritto in "img". Senza immagine appare un gradiente.
+  projects: [
+    {id: "water-leakage", title: "Water leakage prediction", img: "img/water-leakage.jpg", repo: "https://github.com/selisir",
+     tags: ["Deep Learning", "Time Series"],
+     body: "Project work on time-series analysis of water leakage data, comparing traditional models with deep learning approaches."},
+    {id: "knowledge-distillation", title: "Knowledge distillation for image classification", img: "img/knowledge-distillation.jpg", repo: "https://github.com/selisir",
+     tags: ["Computer Vision", "Knowledge Distillation", "FGVC Aircraft"],
+     body: "Implementation of knowledge distillation for image classification on the FGVC Aircraft dataset."},
+    {id: "fourier-transformer", title: "Fourier Transformer for image classification", img: "img/fourier-transformer.jpg", repo: "https://github.com/selisir",
+     tags: ["Data Science", "Computer Vision", "Fourier"],
+     body: "Exploration of the Fourier transform for image classification, comparing models with and without frequency-domain preprocessing."},
+    {id: "masked-language-model", title: "Masked Language Model application", img: "img/masked-language-model.jpg", repo: "https://github.com/selisir",
+     tags: ["NLP", "MLM"],
+     body: "Exploration and implementation of Masked Language Models for representation learning and natural language understanding."},
+    {id: "pharmacy-duty-scheduling", title: "Pharmacy Duty Scheduling", img: "img/pharmacy-duty-scheduling.jpg", repo: "https://github.com/selisir",
+     tags: ["Optimization", "Mosel", "Xpress"],
+     body: "University project for the Optimization Methods course: modelling and solving the scheduling of pharmacy duty shifts with mathematical optimization in Mosel/Xpress."},
+    {id: "scene-graphs-robotics", title: "Accelerating Robotic Perception", img: "img/scene-graphs-robotics.jpg", repo: "https://github.com/selisir",
+     tags: ["Scene Graphs", "GenAI", "Robotics", "Python"],
+     body: "Reply Ambassador project exploring how scene graph architectures and GenAI frameworks enhance real-time decision-making in robotics, with a Python demo."},
+    {id: "smart-glasses-app", title: "Smart glasses application", img: "img/smart-glasses-app.jpg", repo: "https://github.com/selisir",
+     tags: ["Smart Glasses", "Python", "n8n", "Webhooks"],
+     body: "Application for smart glasses built with Hub Simulator, Python scripting, automated workflows (n8n) and webhook-based integrations, developed in the Reply Ambassador programme."}
+  ]
+};
+/* ===== fine dati ===== */
+
+const $ = s => document.querySelector(s);
+const I = {
+  mail: '<svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>',
+  gh: '<svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>',
+  li: '<svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>'
+};
+
+/* tema */
+function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}}
+const EMO={dark:['🌙','⭐','✨'],light:['☀️','🌼','✨'],glitter:['💖','✨','🌸']};
+function setTheme(t,ev){
+  if(t===document.documentElement.dataset.theme)return;
+  if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches)return applyTheme(t);
+  const r=ev.currentTarget.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+  document.startViewTransition(()=>applyTheme(t)).ready.then(()=>document.documentElement.animate(
+    {clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${R}px at ${x}px ${y}px)`]},{duration:700,easing:'ease-in-out',pseudoElement:'::view-transition-new(root)'}));
+  burst(x,y,t,10);
+}
+/* MODIFICA - EFFETTO "BURST": emoji che escono dal punto cliccato, diverse per tema.
+   Cambia le emoji in EMO, il numero (n) o la distanza (d). Si attiva al cambio tema e al click su link/bottoni/riquadri. */
+function burst(x,y,t,n){
+  for(let i=0;i<n;i++){const s=document.createElement('span'),a=Math.PI*2*i/n,d=50+Math.random()*60;
+    s.textContent=EMO[t][i%3];s.style.cssText=`position:fixed;left:${x}px;top:${y}px;z-index:99;pointer-events:none`;document.body.append(s);
+    s.animate({transform:['translate(0,0)',`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.4)`],opacity:[1,0]},{duration:900,easing:'ease-out'}).onfinish=()=>s.remove()}
+}
+addEventListener('click',e=>{
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||e.target.closest('.tb')||!e.target.closest('a,button,.card'))return;
+  burst(e.clientX,e.clientY,document.documentElement.dataset.theme,6);
+});
+
+try{const t=localStorage.getItem('theme');if(t)applyTheme(t)}catch(e){}  /* ricorda il tema scelto */
+
+/* contenuti */
+$('#who').textContent = DATA.name + ' —';
+$('#bio').textContent = DATA.bio;
+$('#exp').innerHTML = DATA.experiences.map(e=>`<div class="card"><b>${e.role}</b> · ${e.org}<div class="mut">${e.period}</div><p>${e.text}</p></div>`).join('');
+$('#sk').innerHTML = Object.entries(DATA.skills).map(([k,v])=>`<p class="mut">${k}</p>${v.map(s=>`<span class="chip">${s}</span>`).join('')}`).join('');
+$('#ct').innerHTML = `<a class="card" href="mailto:${DATA.mail}">${I.mail} Email</a><a class="card" href="${DATA.github}" target="_blank" rel="noopener">${I.gh} GitHub</a><a class="card" href="${DATA.linkedin}" target="_blank" rel="noopener">${I.li} LinkedIn</a>`;
+$('#cv').innerHTML = DATA.cv.map(c=>`<a class="card" href="${c.url}" download>📄 ${c.label}</a>`).join('');
+$('#plist').innerHTML = DATA.projects.map(p=>`<a class="card pc" href="#/p/${p.id}"><div class="im"><img src="${p.img}" alt="${p.title}" onerror="this.remove()"></div><h3>${p.title}</h3></a>`).join('');
+$('#foot').textContent = '© ' + new Date().getFullYear() + ' ' + DATA.name;
+
+/* dettaglio progetto */
+function route(){
+  const m = location.hash.match(/^#\/p\/(.+)$/), p = m && DATA.projects.find(x=>x.id===m[1]);
+  $('#page').classList.toggle('hide', !!p); $('#detail').classList.toggle('hide', !p);
+  if(p){
+    $('#detail').innerHTML = `<a href="#projects">← Tutti i progetti</a><h2 style="margin-top:16px">${p.title}</h2><img src="${p.img}" alt="" style="max-width:100%;border-radius:var(--r)" onerror="this.remove()"><p>${p.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</p><p>${p.body}</p><p><a class="btn" href="${p.repo}" target="_blank" rel="noopener">${I.gh.replace('<svg','<svg style="width:18px;height:18px;fill:currentColor;vertical-align:-3px"')} Vedi su GitHub</a></p>`;
+    scrollTo(0,0);
+  }else{const el=document.getElementById(location.hash.slice(1));if(el)el.scrollIntoView()}
+}
+addEventListener('hashchange', route); route();
+
+/* typing: cicla le parole di DATA.roles */
+(function(){let w=0,c=0,del=false;const el=$('#typed');
+ (function tick(){const word=DATA.roles[w];el.textContent=word.slice(0,c);
+  if(!del&&c===word.length){del=true;return setTimeout(tick,1300)}
+  if(del&&c===0){del=false;w=(w+1)%DATA.roles.length}
+  c+=del?-1:1;setTimeout(tick,del?50:110)})()})();
+
+/* occhi */
+addEventListener('mousemove',e=>{document.querySelectorAll('.pupil').forEach(p=>{
+  const w=p.previousElementSibling.getBoundingClientRect(),a=Math.atan2(e.clientY-w.top-w.height/2,e.clientX-w.left-w.width/2);
+  p.setAttribute('transform',`translate(${Math.cos(a)*4},${Math.sin(a)*4})`)})});
+
+/* glitter animato (attivo solo nel tema glitter) + scia al mouse */
+const cv=$('#sparkle'),g=cv.getContext('2d');let P=[];
+function fit(){cv.width=innerWidth;cv.height=innerHeight}fit();addEventListener('resize',fit);
+const cols=['#fff','#ffd1ea','#ff5fb0','#ffe27a'];
+function spawn(x,y,v){P.push({x,y,vx:(Math.random()-.5)*v,vy:Math.random()*v+.3,s:Math.random()*4+1,l:1,c:cols[Math.random()*4|0]})}
+addEventListener('mousemove',e=>{if(document.documentElement.dataset.theme==='glitter')for(let i=0;i<3;i++)spawn(e.clientX,e.clientY,3)});
+(function loop(){g.clearRect(0,0,cv.width,cv.height);
+ if(document.documentElement.dataset.theme==='glitter'){
+  if(Math.random()<.6)spawn(Math.random()*cv.width,-5,.6);
+  P=P.filter(p=>p.l>0&&p.y<cv.height+10);
+  P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.l-=.004;g.globalAlpha=Math.max(p.l,0)*(.6+.4*Math.sin(p.y/8));g.fillStyle=p.c;
+   g.beginPath();g.moveTo(p.x,p.y-p.s);g.lineTo(p.x+p.s/3,p.y-p.s/3);g.lineTo(p.x+p.s,p.y);g.lineTo(p.x+p.s/3,p.y+p.s/3);g.lineTo(p.x,p.y+p.s);g.lineTo(p.x-p.s/3,p.y+p.s/3);g.lineTo(p.x-p.s,p.y);g.lineTo(p.x-p.s/3,p.y-p.s/3);g.fill()})
+ }else P=[];
+ requestAnimationFrame(loop)})();
+</script>
+</body>
+</html>
