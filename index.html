@@ -67,17 +67,140 @@ section{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:90px 2
 .ic a:hover{color:var(--acc)}
 .hide{display:none!important}
 footer{text-align:center;padding:40px;color:var(--mut)}
+/* ===== COMPONENTI NUOVI: dropdown, timeline, slider, skills, mobile ===== */
+body{overflow-x:hidden}
+.dd{position:relative}
+.dm{position:absolute;right:0;top:120%;background:var(--bg);border:2px solid var(--acc);border-radius:14px;box-shadow:0 8px 24px #0006;padding:4px;display:none;z-index:50}
+.dd.open .dm{display:block}
+.dm button{display:block;width:100%;text-align:center;background:none;border:0;color:var(--fg);padding:6px 12px;font-size:1.35rem;line-height:1.3;cursor:pointer;border-radius:10px}
+.dm button:hover{background:var(--bd)}
+.menu-btn{display:none}
+.links{display:flex;gap:6px 18px;flex-wrap:wrap}
+.tl{position:relative;margin-left:8px;padding-left:28px;border-left:2px solid var(--bd)}
+.tl .it{position:relative;margin-bottom:22px}
+.tl .it::before{content:"";position:absolute;left:-37px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--bg)}
+.tl .when{font-size:.85rem;color:var(--acc)}
+.tl p{margin:.3em 0 0}
+.sl-wrap{position:relative}
+.slider{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;scrollbar-width:thin}
+.slider .pc{flex:0 0 270px;scroll-snap-align:start;margin:0}
+.arr{position:absolute;top:42%;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:var(--card);color:var(--fg);font-size:1.4rem;cursor:pointer;box-shadow:var(--sh)}
+.arr.l{left:-16px}.arr.r{right:-16px}
+.sg{display:flex;gap:6px 8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.sg>b{flex:0 0 130px;color:var(--mut);font-weight:500;font-size:.85rem}
+.chip.s{display:inline-flex;align-items:center;gap:6px;padding:1px 10px;font-size:.85rem;margin:0}
+.chip svg{width:15px;height:15px}
+.dd>.tb{font-size:1.2rem;line-height:1.3;padding:3px 10px}
+.role{font-size:1.7rem;margin:0;min-height:2.4rem;font-family:var(--head)}
+.mq-track .sk-c{flex:0 0 112px;margin:0;padding:14px 8px;text-align:center}
+.sk-c svg{width:36px;height:36px;display:block;margin:0 auto 8px}
+.sk-c .em{font-size:30px;display:block;line-height:36px;margin-bottom:8px}
+.sk-c span:last-child{font-size:.8rem;line-height:1.2;display:block}
+.cert{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.btn.sm{padding:6px 14px;font-size:.85rem;display:inline-block}
+/* ===== COMPONENTI: risorse in Work, flag competenze, skills che scorrono ===== */
+.res{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.rb{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--bd);border-radius:999px;padding:3px 13px;font-size:.85rem;background:var(--card);color:var(--fg)}
+.rb:hover{border-color:var(--acc);color:var(--acc);text-decoration:none}
+.rb.wip{border-style:dashed;opacity:.8}
+.pc .tg{padding:0 14px 14px;display:flex;flex-wrap:wrap;gap:6px}
+.marquee{width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;padding:8px 0 14px;-webkit-mask-image:linear-gradient(90deg,#0000,#000 7%,#000 93%,#0000);mask-image:linear-gradient(90deg,#0000,#000 7%,#000 93%,#0000)}
+.mq-track{display:flex;gap:12px;width:max-content;padding-right:12px;animation:mq 50s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-25%)}}
+@media(prefers-reduced-motion:reduce){.mq-track{animation:none}.marquee{overflow-x:auto}}
+
+/* ===== DARK: TERMINALE (modifica colori in alto, effetti qui) ===== */
+[data-theme=dark]{--bg:#050805;--card:#0a110b;--bd:#17421f;--mut:#6fae80}
+[data-theme=dark] body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:3;background:repeating-linear-gradient(0deg,#0000 0 2px,#00000028 2px 3px),radial-gradient(ellipse at center,#0000 55%,#000000aa 100%)}
+[data-theme=dark] ::selection{background:var(--acc);color:#000}
+[data-theme=dark] h1,[data-theme=dark] h2{text-shadow:0 0 10px #12d64088}
+[data-theme=dark] h2::before{content:"$ "}
+[data-theme=dark] h2::after{content:"_";animation:bl 1s steps(1) infinite}
+[data-theme=dark] #home::before{content:"elisa@portfolio:~$ ./hello.sh";color:var(--mut);font-size:.9rem}
+[data-theme=dark] .typing{border-right:.55em solid var(--acc);padding-right:2px}
+[data-theme=dark] nav{background:#050805ee;border-bottom:1px solid var(--acc)}
+[data-theme=dark] .links a::before{content:"./";color:var(--mut)}
+[data-theme=dark] .card{border-radius:6px;box-shadow:0 0 14px #12d64018}
+[data-theme=dark] .card:hover{box-shadow:0 0 18px #12d64055}
+[data-theme=dark] .pc::before{content:"● ● ●   project.sh";display:block;padding:5px 10px;font-size:.72rem;color:var(--acc);border-bottom:1px solid var(--bd);background:#0d170f}
+[data-theme=dark] .btn{background:#000;color:var(--acc);border:1px solid var(--acc);border-radius:4px;box-shadow:0 0 10px #12d64044}
+[data-theme=dark] .btn::before{content:"> "}
+[data-theme=dark] .btn:hover{background:var(--acc);color:#000;text-decoration:none}
+[data-theme=dark] .tb{background:#000;border-color:var(--acc);color:var(--acc);border-radius:4px}
+[data-theme=dark] .dm{background:#000;box-shadow:0 0 16px #12d64066;border-radius:6px}
+[data-theme=dark] .dm button:hover{background:#12d64033}
+[data-theme=dark] .tl{border-left:2px dashed var(--bd)}
+[data-theme=dark] .tl .it::before{border-radius:0;box-shadow:0 0 8px var(--acc)}
+[data-theme=dark] .tl .when::before{content:"["}
+[data-theme=dark] .tl .when::after{content:"]"}
+[data-theme=dark] .chip,[data-theme=dark] .rb{border-radius:3px}
+[data-theme=dark] .rb::before{content:"$ "}
+
+/* ===== LIGHT: CARTA / STICKER ===== */
+[data-theme=light] body{background-image:radial-gradient(#e2673a2e 1.4px,#0000 1.6px),radial-gradient(circle at 12% 8%,#ffd9a866,#0000 38%),radial-gradient(circle at 92% 30%,#ffb3a066,#0000 36%),radial-gradient(circle at 20% 90%,#fff0a666,#0000 40%);background-size:24px 24px,auto,auto,auto;background-attachment:scroll,fixed,fixed,fixed}
+[data-theme=light] h2{display:inline-block;background:linear-gradient(#0000 62%,#ffd27a 62%);padding:0 6px;transform:rotate(-1deg)}
+[data-theme=light] h2::after{content:" ✿";color:var(--acc)}
+[data-theme=light] #home::before{content:"✿  ☼  ✿";letter-spacing:.4em;color:var(--acc);font-size:1.4rem}
+[data-theme=light] .girl{filter:drop-shadow(6px 6px 0 #2b2119)}
+[data-theme=light] nav{border-bottom:2px solid #2b2119;background:#fbf5eae6}
+[data-theme=light] .card{border:2px solid #2b2119;box-shadow:5px 5px 0 #2b2119;transition:transform .15s,box-shadow .15s}
+[data-theme=light] .card:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--acc)}
+[data-theme=light] .btn{border:2px solid #2b2119;box-shadow:3px 3px 0 #2b2119}
+[data-theme=light] .tb{border:2px solid #2b2119}
+[data-theme=light] .dm{background:#fffdf8;border:2px solid #2b2119;box-shadow:4px 4px 0 #2b2119}
+[data-theme=light] .tl{border-left:3px solid #2b2119}
+[data-theme=light] .tl .it::before{border:2px solid #2b2119;box-shadow:none}
+[data-theme=light] .chip,[data-theme=light] .rb{border:1.5px solid #2b2119;background:#fff6dd}
+[data-theme=light] .rb{box-shadow:2px 2px 0 #2b2119}
+/* ===== GLITTER: PIU' BRILLANTINI (CSS) - i glitter che si muovono sono nello script (cerca "GLITTER (canvas)") ===== */
+@keyframes shim{to{background-position:100% 0}}
+@keyframes glit{from{opacity:.12}to{opacity:.9}}
+@keyframes pulse{50%{transform:scale(1.4)}}
+[data-theme=glitter]{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M14 1l3.2 9.8L27 14l-9.8 3.2L14 27l-3.2-9.8L1 14l9.8-3.2z' fill='%23ff5fb0' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") 14 14,auto}
+[data-theme=glitter] a,[data-theme=glitter] button{cursor:pointer}
+[data-theme=glitter] ::selection{background:#ff5fb0;color:#fff}
+[data-theme=glitter] body{background:radial-gradient(circle at 15% 10%,#fff9 0,#0000 28%),radial-gradient(circle at 85% 25%,#ffe27a66 0,#0000 30%),radial-gradient(circle at 30% 85%,#d8b4ff88 0,#0000 35%),linear-gradient(135deg,#ffb6dc,#ffd6ec 40%,#ffc0e4 70%,#ff9ad5);background-attachment:fixed}
+[data-theme=glitter] body::before,[data-theme=glitter] body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0}
+[data-theme=glitter] body::before{opacity:.7;background:radial-gradient(#fff 1px,#0000 1.7px) 0 0/23px 29px,radial-gradient(#ff5fb0 1px,#0000 1.7px) 11px 14px/31px 37px,radial-gradient(#ffe27a 1px,#0000 1.7px) 5px 22px/43px 41px;animation:glit 2.2s ease-in-out infinite alternate}
+[data-theme=glitter] body::after{background:radial-gradient(#fff 1.2px,#0000 2px) 7px 9px/37px 33px,radial-gradient(#d8b4ff 1px,#0000 1.7px) 19px 4px/29px 47px,radial-gradient(#fff 1px,#0000 1.7px) 3px 25px/53px 39px;animation:glit 1.7s ease-in-out infinite alternate-reverse}
+[data-theme=glitter] h1,[data-theme=glitter] h2{background:linear-gradient(90deg,#e0248f,#ff8fc8,#ffd23f,#ff8fc8,#d18bff,#ff8fc8,#e0248f);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shim 4s ease-in-out infinite alternate;filter:drop-shadow(0 2px 6px #ff5fb066)}
+[data-theme=glitter] #home::before{content:"✦  ✧  ✦";letter-spacing:.5em;color:#fff;text-shadow:0 0 8px #ff5fb0,0 0 16px #ffe27a;font-size:1.6rem;animation:tw 1s infinite alternate}
+[data-theme=glitter] .girl{filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 22px #ff5fb0)}
+[data-theme=glitter] nav{background:#ffd6ecd9;border-bottom:2px solid #fff;box-shadow:0 2px 16px #ff5fb066}
+[data-theme=glitter] .card{position:relative;overflow:hidden;border:2px solid #fff;background:linear-gradient(135deg,#fff0f8cc,#ffd1ea99,#fff0f8cc);box-shadow:0 0 0 2px #ff8fc8,0 8px 26px #e0248f44,inset 0 0 18px #fff9}
+[data-theme=glitter] .card::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,#0000 35%,#fffb 50%,#0000 65%);transform:translateX(-120%)}
+[data-theme=glitter] .card:hover::before{transform:translateX(120%);transition:transform .8s}
+[data-theme=glitter] .btn{background:linear-gradient(90deg,#e0248f,#ff8fc8,#e0248f);background-size:200% 100%;animation:shim 2.5s ease-in-out infinite alternate;border:2px solid #fff;box-shadow:0 0 0 2px #e0248f,0 6px 18px #e0248f77;text-shadow:0 1px 2px #0005}
+[data-theme=glitter] .tb{background:#fff;border:2px solid #ff5fb0;box-shadow:0 0 10px #ff5fb099}
+[data-theme=glitter] .dm{background:#fff0f8;border:2px solid #ff5fb0;box-shadow:0 0 18px #ff5fb0aa}
+[data-theme=glitter] .chip,[data-theme=glitter] .rb{background:#fff;border-color:#ff8fc8;box-shadow:0 0 8px #ff8fc855}
+[data-theme=glitter] .tl{border-left:3px solid #ff8fc8}
+[data-theme=glitter] .tl .it::before{content:"✦";color:#fff;font-size:11px;line-height:14px;text-align:center;box-shadow:0 0 10px #ff5fb0;animation:pulse 1.4s infinite}
+@media(max-width:700px){
+  nav{padding:8px 12px;gap:6px 8px}
+  .links{order:3;flex:0 0 100%;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;gap:18px;scrollbar-width:none;padding-bottom:2px}
+  .links::-webkit-scrollbar{display:none}
+  section{padding:104px 16px 20px}
+  h1{font-size:1.55rem}
+  .role{font-size:1.25rem}
+  .girl{width:150px}
+  .slider .pc{flex-basis:76%}
+  .arr{display:none}
+  .ic a{padding:8px 12px}
+}
 </style>
 </head>
 <body>
 <canvas id="sparkle"></canvas>
 <!-- BARRA IN ALTO: ogni link punta all'id di una sezione (#about, #work...). Aggiungi/togli voci qui e la sezione corrispondente sotto. -->
 <nav>
-  <a href="#home">Home</a><a href="#about">About me</a><a href="#work">Work</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  <div class="links">
+    <a href="#home" data-t="nav_home"></a><a href="#about" data-t="nav_about"></a><a href="#work" data-t="nav_work"></a><a href="#projects" data-t="nav_projects"></a><a href="#skills" data-t="nav_skills"></a><a href="#contact" data-t="nav_contact"></a>
+  </div>
   <span class="sp"></span>
-  <button class="tb" onclick="setTheme('dark',event)" title="Scuro">🌙</button>
-  <button class="tb" onclick="setTheme('light',event)" title="Chiaro">☀️</button>
-  <button class="tb" onclick="setTheme('glitter',event)" title="Glitter">✨</button>
+  <div class="dd" id="ddLang"></div>
+  <div class="dd" id="ddTheme"></div>
 </nav>
 
 <div id="page">
@@ -103,29 +226,39 @@ footer{text-align:center;padding:40px;color:var(--mut)}
       <path d="M98 114q2 6 4 0" stroke="#c98f6b" stroke-width="2" fill="none" stroke-linecap="round"/>
       <path d="M86 132q14 12 28 0" stroke="#c2486a" stroke-width="3" fill="none" stroke-linecap="round"/>
     </svg>
-    <h1>Hi, I'm <span id="who"></span> <span class="typing" id="typed"></span></h1>
-    <button class="btn" onclick="location.hash='#about'">Get started</button>
+    <h1><span data-t="hi"></span> <span id="who"></span> <span class="typing" id="typed"></span></h1>
+    <button class="btn" onclick="location.hash='#about'" data-t="start"></button>
   </section>
   <!-- ABOUT ME: il testo viene da DATA.bio. Per aggiungere una foto o altri paragrafi scrivili dentro questa section. -->
-  <section id="about"><h2>About me</h2><p id="bio"></p></section>
+  <section id="about"><h2 data-t="nav_about"></h2><p id="bio"></p></section>
   <!-- WORK: esperienze, generate da DATA.experiences -->
-  <section id="work"><h2>Work</h2><div id="exp"></div></section>
+  <section id="work"><h2 data-t="nav_work"></h2><div id="exp"></div></section>
   <!-- PROJECTS: riquadri con immagine e titolo, generati da DATA.projects. Il click apre la pagina di dettaglio (id="detail"). -->
-  <section id="projects"><h2>Projects</h2><div class="grid" id="plist"></div></section>
+  <section id="projects"><h2 data-t="nav_projects"></h2><div class="sl-wrap"><button class="arr l" onclick="slide(-1)" aria-label="prev">‹</button><div class="slider" id="plist"></div><button class="arr r" onclick="slide(1)" aria-label="next">›</button></div></section>
   <!-- SKILLS: gruppi di chip, da DATA.skills -->
-  <section id="skills"><h2>Skills</h2><div id="sk"></div></section>
+  <section id="skills"><h2 data-t="nav_skills"></h2><!-- SKILLS: scorrono da sole in orizzontale (passa il mouse per fermarle). Elenco in DATA.skills -->
+    <div class="marquee" id="sk"></div>
+    <h3 data-t="certs" style="margin-top:28px"></h3>
+    <!-- MODIFICA - CERTIFICAZIONI: i riquadri vengono da DATA.certs. In ognuno c'e' il campo "url": incolla il link di verifica
+         (es. Credly / pagina Oracle) e compare il pulsante "Verifica credenziale". Se resta vuoto, il pulsante non si vede. -->
+    <div id="certs"></div></section>
   <!-- CONTACT: icone mail/GitHub/LinkedIn e CV, da DATA -->
-  <section id="contact"><h2>Contact</h2><div class="ic" id="ct"></div><h3 style="margin-top:28px">CV</h3><div class="ic" id="cv"></div></section>
+  <section id="contact"><h2 data-t="nav_contact"></h2><div class="ic" id="ct"></div><h3 style="margin-top:28px">CV</h3><div class="ic" id="cv"></div></section>
 </div>
 <section id="detail" class="hide"></section>
 <footer id="foot"></footer>
 
 <script>
 /* ===== MODIFICA - DATI: qui cambi tutti i contenuti del sito ===== */
+/* MODIFICA - segnaposto per i documenti non ancora pronti (vedi docs/work-in-progress.html).
+   Quando un file e' pronto: mettilo in docs/ e al posto di WIP scrivi il suo percorso, es. "docs/tesi.pdf" */
+const WIP = "docs/work-in-progress.html";
+
 const DATA = {
-  name: "Elisa",
+  name: "Elisa Samaritani",
+  firstName: "Elisa",   // usato nel saluto della home (Hi, I'm ...)
   // Parole che si alternano dopo "Hi, I'm ..." (aggiungine o toglile)
-  roles: ["Coder", "AI Engineer", "Problem Solver", "Optimizer", "Data Scientist", "Cybersecurity Enthusiast"],
+  roles: ["Coder", "ML Engineer", "Problem Solver", "Optimizer"],
   // Testo della sezione About me
   bio: "I'm a Master's student in Artificial Intelligence, Data Science & Big Data at the University of Ferrara, with a Bachelor's degree in Computer Science from the same university. I work on LLM-based AI agents, geospatial data pipelines, computer vision and deep learning, and I've built applications for smart glasses through the Reply Ambassador programme. I enjoy bridging research and real-world implementation, and explaining complex technical ideas clearly, a skill I developed as an IT instructor.",
   // Contatti: mail, GitHub, LinkedIn (le icone si aggiornano da sole)
@@ -138,23 +271,33 @@ const DATA = {
   // Esperienze: copia la riga {role, org, period, text} per aggiungerne altre
   experiences: [
     {role: "Intern, AI Agent Orchestration (thesis)", org: "MEEO S.r.l.", period: "Oct 2025 – Mar 2026",
+     res: [{k:"thesis", url:WIP}],   // risorse cliccabili: k = pdf | slides | paper | article | thesis | project
      text: "Curricular internship for my thesis in Earth Observation. I designed and developed AI agent orchestration systems based on Large Language Models, integrating geospatial data processing pipelines and automated workflows for data analysis and interpretation."},
     {role: "Ambassador", org: "Reply", period: "Jul 2024 – present",
+     res: [{k:"project", n:"Smart glasses app", ni:"App smart glasses", url:"#/p/smart-glasses-app"}, {k:"paper", url:WIP}, {k:"article", url:WIP}],
      text: "Built an application for smart glasses using Hub Simulator, Python scripting, automated workflows and webhook-based integrations. Led the project “Accelerating Robotic Perception: Scene Graphs and GenAI for Agile Robotics”, exploring how scene graphs and GenAI improve real-time decision-making in robotics. Wrote an article on the winners of the 2024 Student Clash (Sidewalk AI, a project for urban accessibility) and designed interactive Figma mockups."},
     {role: "IT Instructor", org: "AECA", period: "Oct 2023 – Apr 2024",
      text: "Taught computer science fundamentals, data management and Microsoft Office in the vocational course “Operatore Informatico”, designing inclusive teaching strategies for teenage learners."},
     {role: "Research Intern", org: "University of Ferrara", period: "Jun – Sep 2023",
+     res: [{k:"pdf", url:WIP}, {k:"slides", url:WIP}],
      text: "Worked with the Julia programming language and carried out research on intelligent data analysis applied to memory consistency and persistence, in a neurophysiological case study."}
   ],
-  // Skills: "Gruppo": ["voce", "voce"]
-  skills: {
-    "Programming": ["Python", "Julia", "TypeScript", "Mosel/Xpress"],
-    "AI / ML": ["Deep Learning", "Computer Vision", "NLP", "LLMs & AI agents", "Time series"],
-    "Data & tools": ["Geospatial pipelines", "n8n", "Git", "Figma"],
-    "Other": ["Cybersecurity (CyberChallenge, CTF)", "Optimization", "UI/UX design", "Teaching"],
-    "Certifications": ["Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate"],
-    "Spoken languages": ["Italian", "English", "French"]
-  },
+  // Skills (scorrono avanti e indietro): "n" = nome mostrato, "logo" = chiave in LOGO (in fondo allo script).
+  // Dove una tecnologia non ha un logo suo uso quello piu' vicino (es. QGIS per le pipeline geospaziali): cambia "logo" se vuoi.
+  skills: [
+    {n:"Python", logo:"Python"}, {n:"Julia", logo:"Julia"}, {n:"TypeScript", logo:"TypeScript"}, {n:"Vite", logo:"Vite"},
+    {n:"Git", logo:"Git"}, {n:"GitHub", logo:"GitHub"}, {n:"Figma", logo:"Figma"}, {n:"n8n", logo:"n8n"},
+    {n:"Oracle Cloud", logo:"Oracle"},
+    {n:"Geospatial pipelines", logo:"QGIS"},
+    {n:"Deep Learning", logo:"PyTorch"}, {n:"Computer Vision", logo:"OpenCV"}, {n:"NLP", logo:"Hugging Face"},
+    {n:"Optimization (Mosel/Xpress)", logo:"FICO"}
+  ],
+  // Certificazioni: "url" = link di verifica della credenziale (lascia "" finche' non ce l'hai)
+  certs: [
+    {name:"Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate", issuer:"Oracle", date:"09/2025", url:""},
+    {name:"Oracle Cloud Infrastructure 2025 Certified Foundations Associate", issuer:"Oracle", date:"09/2025", url:""},
+    {name:"CyberChallenge 2023", issuer:"University of Ferrara", date:"2023", url:""}
+  ],
   // MODIFICA - PROGETTI: sostituisci ogni "repo" col link reale (es. https://github.com/selisir/nome-repo)
   // e metti l'immagine in img/ con il nome scritto in "img". Senza immagine appare un gradiente.
   projects: [
@@ -171,15 +314,40 @@ const DATA = {
      tags: ["NLP", "MLM"],
      body: "Exploration and implementation of Masked Language Models for representation learning and natural language understanding."},
     {id: "pharmacy-duty-scheduling", title: "Pharmacy Duty Scheduling", img: "img/pharmacy-duty-scheduling.jpg", repo: "https://github.com/selisir",
-     tags: ["Optimization", "Mosel", "Xpress"],
+     tags: ["Optimization (Mosel/Xpress)"],
      body: "University project for the Optimization Methods course: modelling and solving the scheduling of pharmacy duty shifts with mathematical optimization in Mosel/Xpress."},
-    {id: "scene-graphs-robotics", title: "Accelerating Robotic Perception", img: "img/scene-graphs-robotics.jpg", repo: "https://github.com/selisir",
+    {id: "scene-graphs-robotics", title: "Accelerating Robotic Perception", img: "img/scene-graphs-robotics.jpg", res: [{k:"paper", url:WIP}], repo: "https://github.com/selisir",
      tags: ["Scene Graphs", "GenAI", "Robotics", "Python"],
      body: "Reply Ambassador project exploring how scene graph architectures and GenAI frameworks enhance real-time decision-making in robotics, with a Python demo."},
-    {id: "smart-glasses-app", title: "Smart glasses application", img: "img/smart-glasses-app.jpg", repo: "https://github.com/selisir",
+    {id: "smart-glasses-app", title: "Smart glasses application", img: "img/smart-glasses-app.jpg", res: [{k:"slides", url:WIP}], repo: "https://github.com/selisir",
      tags: ["Smart Glasses", "Python", "n8n", "Webhooks"],
      body: "Application for smart glasses built with Hub Simulator, Python scripting, automated workflows (n8n) and webhook-based integrations, developed in the Reply Ambassador programme."}
   ]
+};
+
+/* ===== MODIFICA - TRADUZIONI: DATA e' in inglese; qui c'e' l'italiano (cio' che manca resta in inglese) ===== */
+const UI = {
+  en:{hi:"Hi, I'm",start:"Get started",nav_home:"Home",nav_about:"About me",nav_work:"Work",nav_projects:"Projects",nav_skills:"Skills",nav_contact:"Contact",back:"← All projects",gh:"View on GitHub",dark:"Dark",light:"Light",glitter:"Glitter",certs:"Certifications",verify:"Verify credential",res:{pdf:"PDF",slides:"Slides",paper:"Paper",article:"Article",thesis:"Master's thesis",project:"Project"}},
+  it:{hi:"Ciao, sono",start:"Inizia",nav_home:"Home",nav_about:"Chi sono",nav_work:"Esperienze",nav_projects:"Progetti",nav_skills:"Competenze",nav_contact:"Contatti",back:"← Tutti i progetti",gh:"Vedi su GitHub",dark:"Scuro",light:"Chiaro",glitter:"Glitter",certs:"Certificazioni",verify:"Verifica credenziale",res:{pdf:"PDF",slides:"Presentazione",paper:"Paper",article:"Articolo",thesis:"Tesi magistrale",project:"Progetto"}}
+};
+const IT = {
+  bio: "Sono una studentessa magistrale in Artificial Intelligence, Data Science & Big Data all'Università di Ferrara, con una laurea triennale in Informatica nello stesso ateneo. Mi occupo di agenti AI basati su LLM, pipeline di dati geospaziali, computer vision e deep learning, e ho sviluppato applicazioni per smart glasses con il programma Reply Ambassador. Mi piace collegare la ricerca all'implementazione concreta e spiegare in modo chiaro concetti tecnici complessi, competenza maturata come istruttrice informatica.",
+  experiences: [   /* stesso ordine di DATA.experiences */
+    {role:"Tirocinante, orchestrazione di agenti AI (tesi)", period:"Ott 2025 – Mar 2026", text:"Tirocinio curricolare per la tesi nell'ambito dell'Earth Observation. Ho progettato e sviluppato sistemi di orchestrazione di agenti AI basati su Large Language Model, integrando pipeline di elaborazione di dati geospaziali e workflow automatici per l'analisi e l'interpretazione dei dati."},
+    {role:"Ambassador", period:"Lug 2024 – oggi", text:"Ho sviluppato un'applicazione per smart glasses con Hub Simulator, scripting in Python, workflow automatici e integrazioni via webhook. Ho guidato il progetto “Accelerating Robotic Perception: Scene Graphs and GenAI for Agile Robotics”, che studia come scene graph e GenAI migliorino le decisioni in tempo reale in robotica. Ho scritto un articolo sui vincitori dello Student Clash 2024 (Sidewalk AI, progetto per l'accessibilità urbana) e progettato mockup interattivi in Figma."},
+    {role:"Istruttrice informatica", period:"Ott 2023 – Apr 2024", text:"Ho insegnato le basi dell'informatica, la gestione dei dati e gli strumenti Microsoft Office nel corso professionale “Operatore Informatico”, progettando strategie didattiche inclusive per studenti adolescenti."},
+    {role:"Tirocinante di ricerca", period:"Giu – Set 2023", text:"Ho lavorato con il linguaggio Julia e svolto ricerca sull'analisi intelligente dei dati applicata alla consistenza e alla persistenza della memoria, in un caso di studio neurofisiologico."}
+  ],
+  projects: {   /* chiave = id del progetto */
+    "water-leakage": {title:"Predizione di perdite idriche", body:"Project work sull'analisi di serie temporali di perdite idriche, con confronto tra modelli tradizionali e approcci di deep learning."},
+    "knowledge-distillation": {title:"Knowledge distillation per la classificazione di immagini", body:"Implementazione della knowledge distillation per la classificazione di immagini sul dataset FGVC Aircraft."},
+    "fourier-transformer": {title:"Fourier Transformer per la classificazione di immagini", body:"Esplorazione della trasformata di Fourier per la classificazione di immagini, confrontando modelli con e senza pre-elaborazione nel dominio della frequenza."},
+    "masked-language-model": {title:"Applicazione di Masked Language Model", body:"Studio e implementazione di Masked Language Model per l'apprendimento di rappresentazioni e la comprensione del linguaggio naturale."},
+    "pharmacy-duty-scheduling": {title:"Turnistica delle farmacie", body:"Progetto del corso di Metodi di Ottimizzazione: modellazione e risoluzione della turnistica delle farmacie con ottimizzazione matematica in Mosel/Xpress."},
+    "scene-graphs-robotics": {body:"Progetto Reply Ambassador che esplora come architetture a scene graph e framework GenAI migliorino le decisioni in tempo reale in robotica, con una demo in Python."},
+    "smart-glasses-app": {title:"Applicazione per smart glasses", body:"Applicazione per smart glasses realizzata con Hub Simulator, scripting in Python, workflow automatici (n8n) e integrazioni via webhook, sviluppata nel programma Reply Ambassador."}
+  },
+  skItems: {"Geospatial pipelines":"Pipeline geospaziali","Optimization (Mosel/Xpress)":"Ottimizzazione (Mosel/Xpress)","Time Series":"Serie temporali"}
 };
 /* ===== fine dati ===== */
 
@@ -191,12 +359,13 @@ const I = {
 };
 
 /* tema */
-function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}}
-const EMO={dark:['🌙','⭐','✨'],light:['☀️','🌼','✨'],glitter:['💖','✨','🌸']};
+function applyTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}
+  window.__r&&buildDD()}
+const EMO={dark:['🌙','⭐','✨'],light:['☀️','🌼','✨'],glitter:['💖','✨','🌸','⭐','🦄','💎']};
 function setTheme(t,ev){
   if(t===document.documentElement.dataset.theme)return;
   if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches)return applyTheme(t);
-  const r=ev.currentTarget.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+  const r=ev.currentTarget.closest('.dd').firstElementChild.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
   document.startViewTransition(()=>applyTheme(t)).ready.then(()=>document.documentElement.animate(
     {clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${R}px at ${x}px ${y}px)`]},{duration:700,easing:'ease-in-out',pseudoElement:'::view-transition-new(root)'}));
   burst(x,y,t,10);
@@ -205,42 +374,92 @@ function setTheme(t,ev){
    Cambia le emoji in EMO, il numero (n) o la distanza (d). Si attiva al cambio tema e al click su link/bottoni/riquadri. */
 function burst(x,y,t,n){
   for(let i=0;i<n;i++){const s=document.createElement('span'),a=Math.PI*2*i/n,d=50+Math.random()*60;
-    s.textContent=EMO[t][i%3];s.style.cssText=`position:fixed;left:${x}px;top:${y}px;z-index:99;pointer-events:none`;document.body.append(s);
+    s.textContent=EMO[t][i%EMO[t].length];s.style.cssText=`position:fixed;left:${x}px;top:${y}px;z-index:99;pointer-events:none`;document.body.append(s);
     s.animate({transform:['translate(0,0)',`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.4)`],opacity:[1,0]},{duration:900,easing:'ease-out'}).onfinish=()=>s.remove()}
 }
 addEventListener('click',e=>{
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches||e.target.closest('.tb')||!e.target.closest('a,button,.card'))return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||e.target.closest('.tb,.dd')||!e.target.closest('a,button,.card'))return;
   burst(e.clientX,e.clientY,document.documentElement.dataset.theme,6);
 });
 
 try{const t=localStorage.getItem('theme');if(t)applyTheme(t)}catch(e){}  /* ricorda il tema scelto */
 
-/* contenuti */
-$('#who').textContent = DATA.name + ' —';
-$('#bio').textContent = DATA.bio;
-$('#exp').innerHTML = DATA.experiences.map(e=>`<div class="card"><b>${e.role}</b> · ${e.org}<div class="mut">${e.period}</div><p>${e.text}</p></div>`).join('');
-$('#sk').innerHTML = Object.entries(DATA.skills).map(([k,v])=>`<p class="mut">${k}</p>${v.map(s=>`<span class="chip">${s}</span>`).join('')}`).join('');
-$('#ct').innerHTML = `<a class="card" href="mailto:${DATA.mail}">${I.mail} Email</a><a class="card" href="${DATA.github}" target="_blank" rel="noopener">${I.gh} GitHub</a><a class="card" href="${DATA.linkedin}" target="_blank" rel="noopener">${I.li} LinkedIn</a>`;
-$('#cv').innerHTML = DATA.cv.map(c=>`<a class="card" href="${c.url}" download>📄 ${c.label}</a>`).join('');
-$('#plist').innerHTML = DATA.projects.map(p=>`<a class="card pc" href="#/p/${p.id}"><div class="im"><img src="${p.img}" alt="${p.title}" onerror="this.remove()"></div><h3>${p.title}</h3></a>`).join('');
-$('#foot').textContent = '© ' + new Date().getFullYear() + ' ' + DATA.name;
+/* MODIFICA - loghi (Simple Icons): per aggiungerne uno copia una riga e cambia nome, path e colore */
+const LOGO = {
+  "Python": {d:"M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z", c:"#3776AB"},
+  "Julia": {d:"M11.138 17.569a5.569 5.569 0 1 1-11.138 0 5.569 5.569 0 1 1 11.138 0zm6.431-11.138a5.569 5.569 0 1 1-11.138 0 5.569 5.569 0 1 1 11.138 0zM24 17.569a5.569 5.569 0 1 1-11.138 0 5.569 5.569 0 1 1 11.138 0z", c:"#9558B2"},
+  "TypeScript": {d:"M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z", c:"#3178C6"},
+  "Vite": {d:"M13.056 23.238a.57.57 0 0 1-1.02-.355v-5.202c0-.63-.512-1.143-1.144-1.143H5.148a.57.57 0 0 1-.464-.903l3.777-5.29c.54-.753 0-1.804-.93-1.804H.57a.574.574 0 0 1-.543-.746.6.6 0 0 1 .08-.157L5.008.78a.57.57 0 0 1 .467-.24h14.589a.57.57 0 0 1 .466.903l-3.778 5.29c-.54.755 0 1.806.93 1.806h5.745c.238 0 .424.138.513.322a.56.56 0 0 1-.063.603z", c:"#646CFF"},
+  "Git": {d:"M13.09 23.549a1.54 1.54 0 0 1-2.18 0L.451 13.089a1.54 1.54 0 0 1 0-2.179l7.191-7.19 2.733 2.733a1.85 1.85 0 0 0 .964 2.326v6.66a1.849 1.849 0 1 0 1.54 0V8.957l2.508 2.508a1.85 1.85 0 1 0 1.09-1.09l-2.634-2.634a1.85 1.85 0 0 0-2.378-2.377L8.73 2.63 10.91.451a1.54 1.54 0 0 1 2.179 0l10.459 10.46a1.54 1.54 0 0 1 0 2.179z", c:"#F05032"},
+  "GitHub": {d:"M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12", c:"currentColor"},
+  "Figma": {d:"M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z", c:"#F24E1E"},
+  "n8n": {d:"M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632", c:"#EA4B71"},
+  "Oracle": {d:"M16.412 4.412h-8.82a7.588 7.588 0 0 0-.008 15.176h8.828a7.588 7.588 0 0 0 0-15.176zm-.193 12.502H7.786a4.915 4.915 0 0 1 0-9.828h8.433a4.914 4.914 0 1 1 0 9.828z", c:"#F80000"},
+  "QGIS": {d:"M12.879 13.006v3.65l-3.004-3.048v-3.495h3.582l2.852 2.893h-3.43zm10.886 7.606V24h-3.654l-5.73-5.9v-3.55h3.354l6.03 6.062zm-10.828-1.448l3.372 3.371c-1.309.442-2.557.726-4.325.726C5.136 23.26 0 18.243 0 11.565 0 4.92 5.136 0 11.984 0 18.864 0 24 4.952 24 11.565c0 2.12-.523 4.076-1.457 5.759l-3.625-3.725a8.393 8.393 0 0 0 .24-2.005c0-4.291-3.148-7.527-7.1-7.527-3.954 0-7.248 3.236-7.248 7.527s3.33 7.6 7.247 7.6c.548 0 .661.017.88-.03z", c:"#589632"},
+  "PyTorch": {d:"M12.005 0L4.952 7.053a9.865 9.865 0 000 14.022 9.866 9.866 0 0014.022 0c3.984-3.9 3.986-10.205.085-14.023l-1.744 1.743c2.904 2.905 2.904 7.634 0 10.538s-7.634 2.904-10.538 0-2.904-7.634 0-10.538l4.647-4.646.582-.665zm3.568 3.899a1.327 1.327 0 00-1.327 1.327 1.327 1.327 0 001.327 1.328A1.327 1.327 0 0016.9 5.226 1.327 1.327 0 0015.573 3.9z", c:"#EE4C2C"},
+  "Hugging Face": {d:"M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624", c:"#FFD21E"},
+  "OpenCV": {d:"M11.8992.8525C8.735.8525 6.17 3.4175 6.17 6.5817c0 2.102 1.1321 3.9398 2.8198 4.9366l1.6412-2.7849c.0411-.0699.0176-.1593-.0495-.2048-.6233-.4227-1.0328-1.137-1.0328-1.947 0-1.298 1.0524-2.3504 2.3505-2.3504 1.2981 0 2.3505 1.0524 2.3505 2.3505 0 .8098-.4095 1.5242-1.0328 1.947-.0671.0454-.0907.1348-.0495.2047l1.6414 2.785c1.6878-.9969 2.8199-2.8346 2.8199-4.9367 0-3.1642-2.5653-5.7292-5.7295-5.7292zm-6.17 10.8366C2.565 11.6891 0 14.2541 0 17.4183c0 3.1642 2.565 5.7292 5.7292 5.7292 3.1798 0 5.8074-2.6995 5.7275-5.8762H8.2313c-.0847 0-.1513.0717-.1519.1564-.0082 1.266-1.0644 2.3411-2.3502 2.3411-1.2981 0-2.3505-1.0524-2.3505-2.3505 0-1.2982 1.0524-2.3505 2.3505-2.3505.34 0 .663.0724.9547.2022.0713.0318.1566.0077.1962-.0595l1.6464-2.7935c-.8273-.4636-1.7815-.7279-2.7973-.7279zm15.4424.7614l-1.6366 2.7878c-.041.07-.0172.1594.05.2048.624.4217 1.0348 1.1354 1.0363 1.9452.0022 1.298-1.0483 2.352-2.3465 2.3542-1.298.0023-2.3523-1.0482-2.3545-2.3462-.0015-.8098.4068-1.5248 1.0294-1.9486.067-.0457.0905-.1353.0492-.2051l-1.6464-2.7818c-1.6859.9998-2.8146 2.8394-2.811 4.9415.0056 3.1641 2.575 5.7248 5.7393 5.7192 3.1641-.0054 5.7246-2.575 5.7192-5.7392-.0037-2.1022-1.139-3.938-2.8284-4.9318z", c:"#5C3EE8"}
+};
+/* MODIFICA - emoji di riserva per le skill senza logo */
+const EM = {"Optimization (Mosel/Xpress)":"⚙️"};   /* Xpress non ha un logo in Simple Icons */
+/* tag competenze di un progetto: logo preso da DATA.skills se il nome coincide */
+function tagChip(t){const s=DATA.skills.find(x=>x.n===t);return `<span class="chip s">${s?icon(s.logo,t):''}${lang==='it'?(IT.skItems[t]||t):t}</span>`}
+/* pulsanti risorse (Work e Progetti); i link a WIP appaiono tratteggiati */
+const RESI={pdf:'📄',slides:'📊',paper:'📝',article:'📰',thesis:'🎓',project:'🔗'};
+function resBtns(a){return a.map(r=>{const w=r.url===WIP;return `<a class="rb${w?' wip':''}" href="${r.url}"${r.url[0]==='#'?'':' target="_blank" rel="noopener"'}${w?' title="Work in progress"':''}>${RESI[r.k]} ${(lang==='it'&&r.ni)||r.n||UI[lang].res[r.k]}</a>`}).join('')}
+function icon(l,n){const o=LOGO[l];return o?`<svg viewBox="0 0 24 24" style="fill:${o.c}"><path d="${o.d}"/></svg>`:`<span class="em">${EM[n]||'🔧'}</span>`}
+
+/* lingua: salvata nel browser; di default quella del browser */
+let lang='en';
+try{lang=localStorage.getItem('lang')||((navigator.language||'en').slice(0,2)==='it'?'it':'en')}catch(e){}
+const tr=(o,id)=>lang==='it'&&id!==undefined&&IT.projects[id]?{...o,...IT.projects[id]}:o;
+
+/* menu a tendina (tema e lingua) */
+const closeDD=()=>document.querySelectorAll('.dd.open').forEach(d=>d.classList.remove('open'));
+addEventListener('click',closeDD);
+function dd(id,items,cur,pick){const el=$(id),c=items.find(i=>i.k===cur);
+  el.innerHTML=`<button class="tb" title="${c.l}" aria-label="${c.l}">${c.i}</button><div class="dm">`+items.map(i=>`<button data-k="${i.k}" title="${i.l}" aria-label="${i.l}">${i.i}</button>`).join('')+'</div>';
+  el.firstElementChild.onclick=ev=>{ev.stopPropagation();const o=el.classList.contains('open');closeDD();if(!o)el.classList.add('open')};
+  el.querySelectorAll('.dm button').forEach(b=>b.onclick=ev=>{ev.stopPropagation();pick(b.dataset.k,ev);closeDD()})}
+function buildDD(){const U=UI[lang];
+  dd('#ddTheme',[{k:'dark',i:'🌙',l:U.dark},{k:'light',i:'☀️',l:U.light},{k:'glitter',i:'✨',l:U.glitter}],document.documentElement.dataset.theme,(k,ev)=>setTheme(k,ev));
+  dd('#ddLang',[{k:'it',i:'🇮🇹',l:'Italiano'},{k:'en',i:'🇬🇧',l:'English'}],lang,k=>{lang=k;try{localStorage.setItem('lang',k)}catch(e){}build()})}
+
+/* costruzione della pagina (si rifà quando cambia la lingua) */
+function build(){const it=lang==='it';
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-t]').forEach(e=>e.textContent=UI[lang][e.dataset.t]);
+  $('#who').textContent=DATA.firstName+' —';
+  $('#bio').textContent=it?IT.bio:DATA.bio;
+  $('#exp').innerHTML='<div class="tl">'+DATA.experiences.map((e,i)=>{const x=it?{...e,...IT.experiences[i]}:e;
+    return `<div class="it"><div class="when">${x.period}</div><b>${x.role}</b> · ${x.org}<p>${x.text}</p>${e.res?`<div class="res">${resBtns(e.res)}</div>`:''}</div>`}).join('')+'</div>';
+  const sk=DATA.skills.map(s=>`<div class="card sk-c">${icon(s.logo,s.n)}<span>${it?(IT.skItems[s.n]||s.n):s.n}</span></div>`).join('');
+  $('#sk').innerHTML=`<div class="mq-track">${sk}${sk}${sk}${sk}</div>`;
+  $('#certs').innerHTML=DATA.certs.map(c=>`<div class="card cert"><div><b>${c.name}</b><div class="mut">${c.issuer} · ${c.date}</div></div>${c.url?`<a class="btn sm" href="${c.url}" target="_blank" rel="noopener">${UI[lang].verify} ↗</a>`:''}</div>`).join('');
+  $('#ct').innerHTML=`<a class="card" href="mailto:${DATA.mail}">${I.mail} Email</a><a class="card" href="${DATA.github}" target="_blank" rel="noopener">${I.gh} GitHub</a><a class="card" href="${DATA.linkedin}" target="_blank" rel="noopener">${I.li} LinkedIn</a>`;
+  $('#cv').innerHTML=DATA.cv.map(c=>`<a class="card" href="${c.url}" download>📄 ${c.label}</a>`).join('');
+  $('#plist').innerHTML=DATA.projects.map(p=>{const x=tr(p,p.id);return `<a class="card pc" href="#/p/${p.id}"><div class="im"><img src="${p.img}" alt="${x.title}" onerror="this.remove()"></div><h3>${x.title}</h3><div class="tg">${p.tags.map(tagChip).join('')}</div></a>`}).join('');
+  $('#foot').textContent='© '+new Date().getFullYear()+' '+DATA.name;
+  buildDD();route(false)}
+/* slider progetti: frecce su desktop, swipe su mobile */
+function slide(d,id='plist'){const s=$('#'+id);s.scrollBy({left:d*s.clientWidth*.8,behavior:'smooth'})}
 
 /* dettaglio progetto */
-function route(){
-  const m = location.hash.match(/^#\/p\/(.+)$/), p = m && DATA.projects.find(x=>x.id===m[1]);
-  $('#page').classList.toggle('hide', !!p); $('#detail').classList.toggle('hide', !p);
-  if(p){
-    $('#detail').innerHTML = `<a href="#projects">← Tutti i progetti</a><h2 style="margin-top:16px">${p.title}</h2><img src="${p.img}" alt="" style="max-width:100%;border-radius:var(--r)" onerror="this.remove()"><p>${p.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</p><p>${p.body}</p><p><a class="btn" href="${p.repo}" target="_blank" rel="noopener">${I.gh.replace('<svg','<svg style="width:18px;height:18px;fill:currentColor;vertical-align:-3px"')} Vedi su GitHub</a></p>`;
-    scrollTo(0,0);
-  }else{const el=document.getElementById(location.hash.slice(1));if(el)el.scrollIntoView()}
-}
-addEventListener('hashchange', route); route();
+function route(scroll=true){
+  const m=location.hash.match(/^#\/p\/(.+)$/),p=m&&DATA.projects.find(x=>x.id===m[1]);
+  $('#page').classList.toggle('hide',!!p);$('#detail').classList.toggle('hide',!p);
+  if(p){const x=tr(p,p.id),U=UI[lang];
+    $('#detail').innerHTML=`<a href="#projects">${U.back}</a><h2 style="margin-top:16px">${x.title}</h2><img src="${p.img}" alt="" style="max-width:100%;border-radius:var(--r)" onerror="this.remove()"><p>${p.tags.map(tagChip).join('')}</p><p>${x.body}</p><p><a class="btn" href="${p.repo}" target="_blank" rel="noopener">${I.gh.replace('<svg','<svg style="width:18px;height:18px;fill:currentColor;vertical-align:-3px"')} ${U.gh}</a></p>${p.res?`<div class="res">${resBtns(p.res)}</div>`:''}`;
+    scrollTo(0,0)}
+  else if(scroll){const el=document.getElementById(location.hash.slice(1));if(el)el.scrollIntoView()}}
+addEventListener('hashchange',()=>route());
+build();window.__r=1;
 
 /* typing: cicla le parole di DATA.roles */
 (function(){let w=0,c=0,del=false;const el=$('#typed');
- (function tick(){const word=DATA.roles[w];el.textContent=word.slice(0,c);
-  if(!del&&c===word.length){del=true;return setTimeout(tick,1300)}
-  if(del&&c===0){del=false;w=(w+1)%DATA.roles.length}
+ (function tick(){const R=(lang==='it'&&IT.roles)||DATA.roles,word=R[w%R.length];el.textContent=word.slice(0,c);
+  if(!del&&c>=word.length){del=true;return setTimeout(tick,1300)}
+  if(del&&c<=0){del=false;w=(w+1)%R.length}
   c+=del?-1:1;setTimeout(tick,del?50:110)})()})();
 
 /* occhi */
@@ -248,20 +467,37 @@ addEventListener('mousemove',e=>{document.querySelectorAll('.pupil').forEach(p=>
   const w=p.previousElementSibling.getBoundingClientRect(),a=Math.atan2(e.clientY-w.top-w.height/2,e.clientX-w.left-w.width/2);
   p.setAttribute('transform',`translate(${Math.cos(a)*4},${Math.sin(a)*4})`)})});
 
-/* glitter animato (attivo solo nel tema glitter) + scia al mouse */
-const cv=$('#sparkle'),g=cv.getContext('2d');let P=[];
-function fit(){cv.width=innerWidth;cv.height=innerHeight}fit();addEventListener('resize',fit);
-const cols=['#fff','#ffd1ea','#ff5fb0','#ffe27a'];
-function spawn(x,y,v){P.push({x,y,vx:(Math.random()-.5)*v,vy:Math.random()*v+.3,s:Math.random()*4+1,l:1,c:cols[Math.random()*4|0]})}
-addEventListener('mousemove',e=>{if(document.documentElement.dataset.theme==='glitter')for(let i=0;i<3;i++)spawn(e.clientX,e.clientY,3)});
-(function loop(){g.clearRect(0,0,cv.width,cv.height);
- if(document.documentElement.dataset.theme==='glitter'){
-  if(Math.random()<.6)spawn(Math.random()*cv.width,-5,.6);
-  P=P.filter(p=>p.l>0&&p.y<cv.height+10);
-  P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.l-=.004;g.globalAlpha=Math.max(p.l,0)*(.6+.4*Math.sin(p.y/8));g.fillStyle=p.c;
-   g.beginPath();g.moveTo(p.x,p.y-p.s);g.lineTo(p.x+p.s/3,p.y-p.s/3);g.lineTo(p.x+p.s,p.y);g.lineTo(p.x+p.s/3,p.y+p.s/3);g.lineTo(p.x,p.y+p.s);g.lineTo(p.x-p.s/3,p.y+p.s/3);g.lineTo(p.x-p.s,p.y);g.lineTo(p.x-p.s/3,p.y-p.s/3);g.fill()})
- }else P=[];
- requestAnimationFrame(loop)})();
+/* ===== GLITTER (canvas): MODIFICA quantita', colori e forme in GL ===== */
+const cv=$('#sparkle'),g=cv.getContext('2d'),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const GL={density:innerWidth<700?4500:8500,   // piu' basso = piu' brillantini che cadono
+  max:420,                                   // massimo di scintille contemporanee
+  cols:['#ffffff','#fff3b0','#ffd1ea','#ff5fb0','#ff9ad5','#d8b4ff','#b8f3ff']};
+let W,H,F=[],S=[],T=0;                        // F = brillantini che cadono, S = stelline/scintille
+const rnd=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.random()*a.length|0],glit=()=>document.documentElement.dataset.theme==='glitter'&&!RM;
+function fit(){W=cv.width=innerWidth;H=cv.height=innerHeight}fit();addEventListener('resize',fit);
+const flake=init=>({x:rnd(0,W),y:init?rnd(0,H):-8,vy:rnd(.25,1.1),sw:rnd(.5,2),ph:rnd(0,6.28),s:rnd(1.2,4.2),r:rnd(0,6.28),vr:rnd(-.08,.08),fl:rnd(.04,.16),c:pick(GL.cols)});
+const part=(x,y,o)=>S.push(Object.assign({x,y,vx:0,vy:0,g:0,fr:1,s:rnd(5,15),l:1,d:rnd(.012,.03),c:pick(GL.cols),k:'star',ph:rnd(0,6.28)},o));
+function drawStar(x,y,s,rot){g.beginPath();for(let i=0;i<8;i++){const a=rot+i*Math.PI/4,r=i%2?s*.28:s;g.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}g.closePath();g.fill()}
+/* scia di scintille dietro mouse/dito */
+function trail(x,y){if(!glit())return;for(let i=0;i<4&&S.length<GL.max*1.5;i++)part(x+rnd(-6,6),y+rnd(-6,6),{vx:rnd(-1.2,1.2),vy:rnd(-1.5,.5),g:.05,fr:.97,s:rnd(4,12),d:rnd(.02,.04),k:Math.random()<.5?'spark':'dot'})}
+addEventListener('mousemove',e=>trail(e.clientX,e.clientY));
+addEventListener('touchmove',e=>{const t=e.touches[0];t&&trail(t.clientX,t.clientY)},{passive:true});
+/* esplosione di glitter al click/tocco */
+addEventListener('click',e=>{if(!glit())return;for(let i=0;i<36;i++){const a=rnd(0,6.28),v=rnd(1.5,6.5);part(e.clientX,e.clientY,{vx:Math.cos(a)*v,vy:Math.sin(a)*v,g:.09,fr:.95,s:rnd(5,16),k:Math.random()<.6?'spark':'dot'})}});
+(function loop(){g.clearRect(0,0,W,H);
+ if(glit()){
+  while(F.length<W*H/GL.density)F.push(flake(true));
+  for(const f of F){f.y+=f.vy;f.x+=Math.sin(T*.02+f.ph)*.3*f.sw;f.r+=f.vr;if(f.y>H+8)Object.assign(f,flake(false));
+   g.globalAlpha=.25+.75*Math.abs(Math.sin(T*f.fl+f.ph));g.fillStyle=f.c;   /* luccica */
+   g.save();g.translate(f.x,f.y);g.rotate(f.r);g.scale(1,Math.abs(Math.cos(T*f.fl*1.7+f.ph))*.8+.2);g.fillRect(-f.s/2,-f.s/2,f.s,f.s);g.restore()}
+  if(Math.random()<.18&&S.length<GL.max)part(rnd(0,W),rnd(0,H),{vy:.15,d:rnd(.006,.016)});   /* stelle che sbocciano ovunque */
+  S=S.filter(p=>p.l>0);
+  for(const p of S){p.x+=p.vx;p.y+=p.vy;p.vx*=p.fr;p.vy=p.vy*p.fr+p.g;p.l-=p.d;
+   const a=Math.max(p.l,0);g.globalAlpha=Math.min(1,a*1.6)*(.65+.35*Math.sin(T*.3+p.ph));g.fillStyle=p.c;
+   const sz=p.s*(p.k==='star'?Math.sin(Math.min(1,a)*Math.PI):a);
+   if(p.k==='dot'){g.beginPath();g.arc(p.x,p.y,Math.max(sz/3,.3),0,6.28);g.fill()}else drawStar(p.x,p.y,sz,p.k==='star'?T*.01:0)}
+ }else S=[];
+ g.globalAlpha=1;T++;requestAnimationFrame(loop)})();
 </script>
 </body>
 </html>
